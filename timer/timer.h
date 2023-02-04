@@ -10,6 +10,7 @@
 #ifndef __TIMER_H
 #define __TIMER_H
 #include <stdint.h>
+#include "../macros.h"
 /* init_timer.c */
 
 
