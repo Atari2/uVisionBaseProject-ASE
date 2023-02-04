@@ -9,6 +9,7 @@
 *********************************************************************************************************/
 #include "lpc17xx.h"
 #include "timer.h"
+#include "../LED/led.h"
 
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
@@ -21,6 +22,13 @@
 ******************************************************************************/
 void TIMER0_IRQHandler (void)
 {
+	static _Bool led_on = 0;
+	if (led_on) {
+		LED_Out(0xFF);
+	} else {
+		LED_Out(0x00);
+	}
+	led_on = !led_on;
   LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
