@@ -1,25 +1,36 @@
-/******************************************************************************
- * @file:    system_LPC17xx.c
- * @purpose: CMSIS Cortex-M3 Device Peripheral Access Layer Source File
- *           for the NXP LPC17xx Device Series 
- * @version: V1.5
- * @date:    11th January 2010
- *----------------------------------------------------------------------------
- *
- * Copyright (C) 2008 ARM Limited. All rights reserved.
- *
- * ARM Limited (ARM) is supplying this software for use with Cortex-M3 
- * processor based microcontrollers.  This file can be freely distributed 
- * within development tools that are supporting such ARM based processors. 
- *
- * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
- * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
- * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
- * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
- *
+/**************************************************************************//**
+ * @file     system_LPC17xx.c
+ * @brief    CMSIS Device System Source File for
+ *           NXP LPC17xx Device Series
+ * @version  V1.14
+ * @date     05. April 2016
  ******************************************************************************/
+/* Copyright (c) 2012 - 2016 ARM LIMITED
 
+   All rights reserved.
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+   - Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   - Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+   - Neither the name of ARM nor the names of its contributors may be used
+     to endorse or promote products derived from this software without
+     specific prior written permission.
+   *
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGE.
+   ---------------------------------------------------------------------------*/
 
 #include <stdint.h>
 #include "LPC17xx.h"
@@ -34,7 +45,7 @@
 //   <h> System Controls and Status Register (SCS)
 //     <o1.4>    OSCRANGE: Main Oscillator Range Select
 //                     <0=>  1 MHz to 20 MHz
-//                     <1=> 15 MHz to 24 MHz
+//                     <1=> 15 MHz to 25 MHz
 //     <e1.5>       OSCEN: Main Oscillator Enable
 //     </e>
 //   </h>
@@ -93,72 +104,72 @@
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.2..3>    PCLK_TIMER0: Peripheral Clock Selection for TIMER0
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.4..5>    PCLK_TIMER1: Peripheral Clock Selection for TIMER1
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.6..7>    PCLK_UART0: Peripheral Clock Selection for UART0
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.8..9>    PCLK_UART1: Peripheral Clock Selection for UART1
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.12..13>  PCLK_PWM1: Peripheral Clock Selection for PWM1
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.14..15>  PCLK_I2C0: Peripheral Clock Selection for I2C0
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.16..17>  PCLK_SPI: Peripheral Clock Selection for SPI
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.20..21>  PCLK_SSP1: Peripheral Clock Selection for SSP1
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.22..23>  PCLK_DAC: Peripheral Clock Selection for DAC
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.24..25>  PCLK_ADC: Peripheral Clock Selection for ADC
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o9.26..27>  PCLK_CAN1: Peripheral Clock Selection for CAN1
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 6
+//                     <3=> Pclk = Cclk / 6
 //     <o9.28..29>  PCLK_CAN2: Peripheral Clock Selection for CAN2
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 6
+//                     <3=> Pclk = Cclk / 6
 //     <o9.30..31>  PCLK_ACF: Peripheral Clock Selection for ACF
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 6
+//                     <3=> Pclk = Cclk / 6
 //   </h>
 //
 //   <h> Peripheral Clock Selection Register 1 (PCLKSEL1)
@@ -166,72 +177,72 @@
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.2..3>   PCLK_GPIO: Peripheral Clock Selection for GPIOs
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.4..5>   PCLK_PCB: Peripheral Clock Selection for the Pin Connect Block
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.6..7>   PCLK_I2C1: Peripheral Clock Selection for I2C1
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.10..11> PCLK_SSP0: Peripheral Clock Selection for SSP0
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.12..13> PCLK_TIMER2: Peripheral Clock Selection for TIMER2
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.14..15> PCLK_TIMER3: Peripheral Clock Selection for TIMER3
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.16..17> PCLK_UART2: Peripheral Clock Selection for UART2
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.18..19> PCLK_UART3: Peripheral Clock Selection for UART3
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.20..21> PCLK_I2C2: Peripheral Clock Selection for I2C2
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.22..23> PCLK_I2S: Peripheral Clock Selection for I2S
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.26..27> PCLK_RIT: Peripheral Clock Selection for the Repetitive Interrupt Timer
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.28..29> PCLK_SYSCON: Peripheral Clock Selection for the System Control Block
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //     <o10.30..31> PCLK_MC: Peripheral Clock Selection for the Motor Control PWM
 //                     <0=> Pclk = Cclk / 4
 //                     <1=> Pclk = Cclk
 //                     <2=> Pclk = Cclk / 2
-//                     <3=> Pclk = Hclk / 8
+//                     <3=> Pclk = Cclk / 8
 //   </h>
 //
 //   <h> Power Control for Peripherals Register (PCONP)
@@ -278,6 +289,9 @@
 //
 // </e>
 */
+
+
+
 #define CLOCK_SETUP           1
 #define SCS_Val               0x00000020
 #define CLKSRCSEL_Val         0x00000001
@@ -340,8 +354,9 @@
     #error "CCLKCFG: CCLKSEL must be greater then 1 if PLL0 is used!"
   #endif
 #endif
-#if ((CCLKCFG_Val != 0) && (((CCLKCFG_Val - 1) % 2)))
-   #error "CCLKCFG: CCLKSEL field does not contain only odd values or 0!"
+
+#if (CHECK_RANGE((CCLKCFG_Val), 0, 255))
+   #error "CCLKCFG: Value out of range!"
 #endif
 
 #if (CHECK_RSVD((USBCLKCFG_Val), ~0x0000000F))
@@ -373,54 +388,119 @@
 /*----------------------------------------------------------------------------
   DEFINES
  *----------------------------------------------------------------------------*/
-    
+
 /*----------------------------------------------------------------------------
   Define clocks
  *----------------------------------------------------------------------------*/
 #define XTAL        (12000000UL)        /* Oscillator frequency               */
 #define OSC_CLK     (      XTAL)        /* Main oscillator frequency          */
-#define RTC_CLK     (   32000UL)        /* RTC oscillator frequency           */
+#define RTC_CLK     (   32768UL)        /* RTC oscillator frequency           */
 #define IRC_OSC     ( 4000000UL)        /* Internal RC oscillator frequency   */
 
 
-/*----------------------------------------------------------------------------
-  Clock Variable definitions
- *----------------------------------------------------------------------------*/
-uint32_t SystemFrequency = IRC_OSC; /*!< System Clock Frequency (Core Clock)  */
-#ifdef SIMULATOR
-uint8_t ScaleFlag = 0;
-#endif
+/* F_cco0 = (2 * M * F_in) / N  */
+#define __M               (((PLL0CFG_Val      ) & 0x7FFF) + 1)
+#define __N               (((PLL0CFG_Val >> 16) & 0x00FF) + 1)
+#define __FCCO(__F_IN)    ((2ULL * __M * __F_IN) / __N)
+#define __CCLK_DIV        (((CCLKCFG_Val      ) & 0x00FF) + 1)
 
-/**
- * Initialize the system
- *
- * @param  none
- * @return none
- *
- * @brief  Setup the microcontroller system.
- *         Initialize the System and update the SystemFrequency variable.
- */
+/* Determine core clock frequency according to settings */
+ #if (PLL0_SETUP)
+    #if   ((CLKSRCSEL_Val & 0x03) == 1)
+        #define __CORE_CLK (__FCCO(OSC_CLK) / __CCLK_DIV)
+    #elif ((CLKSRCSEL_Val & 0x03) == 2)
+        #define __CORE_CLK (__FCCO(RTC_CLK) / __CCLK_DIV)
+    #else
+        #define __CORE_CLK (__FCCO(IRC_OSC) / __CCLK_DIV)
+    #endif
+ #else
+    #if   ((CLKSRCSEL_Val & 0x03) == 1)
+        #define __CORE_CLK (OSC_CLK         / __CCLK_DIV)
+    #elif ((CLKSRCSEL_Val & 0x03) == 2)
+        #define __CORE_CLK (RTC_CLK         / __CCLK_DIV)
+    #else
+        #define __CORE_CLK (IRC_OSC         / __CCLK_DIV)
+    #endif
+ #endif
+
+
+
+/*----------------------------------------------------------------------------
+  System Core Clock Variable
+ *----------------------------------------------------------------------------*/
+uint32_t SystemCoreClock = __CORE_CLK;
+
+
+/*----------------------------------------------------------------------------
+  SystemCoreClockUpdate
+ *----------------------------------------------------------------------------*/
+void SystemCoreClockUpdate (void)               /* Get Core Clock Frequency   */
+{
+  /* Determine clock frequency according to clock register values             */
+  if (((LPC_SC->PLL0STAT >> 24) & 3) == 3) { /* If PLL0 enabled and connected */
+    switch (LPC_SC->CLKSRCSEL & 0x03) {
+      case 0:                                /* Int. RC oscillator => PLL0    */
+      case 3:                                /* Reserved, default to Int. RC  */
+        SystemCoreClock = (IRC_OSC *
+                          ((2ULL * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
+                          (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)       /
+                          ((LPC_SC->CCLKCFG & 0xFF)+ 1));
+        break;
+      case 1:                                /* Main oscillator => PLL0       */
+        SystemCoreClock = (OSC_CLK *
+                          ((2ULL * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
+                          (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)       /
+                          ((LPC_SC->CCLKCFG & 0xFF)+ 1));
+        break;
+      case 2:                                /* RTC oscillator => PLL0        */
+        SystemCoreClock = (RTC_CLK *
+                          ((2ULL * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
+                          (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)       /
+                          ((LPC_SC->CCLKCFG & 0xFF)+ 1));
+        break;
+    }
+  } else {
+    switch (LPC_SC->CLKSRCSEL & 0x03) {
+      case 0:                                /* Int. RC oscillator => PLL0    */
+      case 3:                                /* Reserved, default to Int. RC  */
+        SystemCoreClock = IRC_OSC / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
+        break;
+      case 1:                                /* Main oscillator => PLL0       */
+        SystemCoreClock = OSC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
+        break;
+      case 2:                                /* RTC oscillator => PLL0        */
+        SystemCoreClock = RTC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
+        break;
+    }
+  }
+
+}
+
+/*----------------------------------------------------------------------------
+  SystemInit
+ *----------------------------------------------------------------------------*/
 void SystemInit (void)
 {
-#ifdef SIMULATOR
-	uint32_t i = 0;
-	uint32_t N = 100000;
-#endif
 #if (CLOCK_SETUP)                       /* Clock Setup                        */
   LPC_SC->SCS       = SCS_Val;
-  if (SCS_Val & (1 << 5)) {             /* If Main Oscillator is enabled      */
+  if (LPC_SC->SCS & (1 << 5)) {             /* If Main Oscillator is enabled  */
     while ((LPC_SC->SCS & (1<<6)) == 0);/* Wait for Oscillator to be ready    */
   }
 
   LPC_SC->CCLKCFG   = CCLKCFG_Val;      /* Setup Clock Divider                */
-
+  /* Periphral clock must be selected before PLL0 enabling and connecting
+   * - according errata.lpc1768-16.March.2010 -
+   */
   LPC_SC->PCLKSEL0  = PCLKSEL0_Val;     /* Peripheral Clock Selection         */
   LPC_SC->PCLKSEL1  = PCLKSEL1_Val;
 
-  LPC_SC->CLKSRCSEL = CLKSRCSEL_Val;    /* Select Clock Source for PLL0       */
+  LPC_SC->CLKSRCSEL = CLKSRCSEL_Val;    /* Select Clock Source sysclk / PLL0  */
 
 #if (PLL0_SETUP)
-  LPC_SC->PLL0CFG   = PLL0CFG_Val;
+  LPC_SC->PLL0CFG   = PLL0CFG_Val;      /* configure PLL0                     */
+  LPC_SC->PLL0FEED  = 0xAA;
+  LPC_SC->PLL0FEED  = 0x55;
+
   LPC_SC->PLL0CON   = 0x01;             /* PLL0 Enable                        */
   LPC_SC->PLL0FEED  = 0xAA;
   LPC_SC->PLL0FEED  = 0x55;
@@ -429,10 +509,14 @@ void SystemInit (void)
   LPC_SC->PLL0CON   = 0x03;             /* PLL0 Enable & Connect              */
   LPC_SC->PLL0FEED  = 0xAA;
   LPC_SC->PLL0FEED  = 0x55;
+  while ((LPC_SC->PLL0STAT & ((1<<25) | (1<<24))) != ((1<<25) | (1<<24)));  /* Wait for PLLC0_STAT & PLLE0_STAT */
 #endif
 
 #if (PLL1_SETUP)
   LPC_SC->PLL1CFG   = PLL1CFG_Val;
+  LPC_SC->PLL1FEED  = 0xAA;
+  LPC_SC->PLL1FEED  = 0x55;
+
   LPC_SC->PLL1CON   = 0x01;             /* PLL1 Enable                        */
   LPC_SC->PLL1FEED  = 0xAA;
   LPC_SC->PLL1FEED  = 0x55;
@@ -441,6 +525,7 @@ void SystemInit (void)
   LPC_SC->PLL1CON   = 0x03;             /* PLL1 Enable & Connect              */
   LPC_SC->PLL1FEED  = 0xAA;
   LPC_SC->PLL1FEED  = 0x55;
+  while ((LPC_SC->PLL1STAT & ((1<< 9) | (1<< 8))) != ((1<< 9) | (1<< 8)));  /* Wait for PLLC1_STAT & PLLE1_STAT */
 #else
   LPC_SC->USBCLKCFG = USBCLKCFG_Val;    /* Setup USB Clock Divider            */
 #endif
@@ -450,58 +535,7 @@ void SystemInit (void)
   LPC_SC->CLKOUTCFG = CLKOUTCFG_Val;    /* Clock Output Configuration         */
 #endif
 
-  /* Determine clock frequency according to clock register values             */
-  if (((LPC_SC->PLL0STAT >> 24)&3)==3) {/* If PLL0 enabled and connected      */
-    switch (LPC_SC->CLKSRCSEL & 0x03) {
-      case 0:                           /* Internal RC oscillator => PLL0     */
-      case 3:                           /* Reserved, default to Internal RC   */
-        SystemFrequency = (IRC_OSC * 
-                          ((2 * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
-                          (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)    /
-                          ((LPC_SC->CCLKCFG & 0xFF)+ 1));
-        break;
-      case 1:                           /* Main oscillator => PLL0            */
-        SystemFrequency = (OSC_CLK * 
-                          ((2 * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
-                          (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)    /
-                          ((LPC_SC->CCLKCFG & 0xFF)+ 1));
-        break;
-      case 2:                           /* RTC oscillator => PLL0             */
-        SystemFrequency = (RTC_CLK * 
-                          ((2 * ((LPC_SC->PLL0STAT & 0x7FFF) + 1)))  /
-                          (((LPC_SC->PLL0STAT >> 16) & 0xFF) + 1)    /
-                          ((LPC_SC->CCLKCFG & 0xFF)+ 1));
-        break;
-    }
-  } else {
-    switch (LPC_SC->CLKSRCSEL & 0x03) {
-      case 0:                           /* Internal RC oscillator => PLL0     */
-      case 3:                           /* Reserved, default to Internal RC   */
-        SystemFrequency = IRC_OSC / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
-        break;
-      case 1:                           /* Main oscillator => PLL0            */
-        SystemFrequency = OSC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
-        break;
-      case 2:                           /* RTC oscillator => PLL0             */
-        SystemFrequency = RTC_CLK / ((LPC_SC->CCLKCFG & 0xFF)+ 1);
-        break;
-    }
-  }
-
 #if (FLASH_SETUP == 1)                  /* Flash Accelerator Setup            */
-  LPC_SC->FLASHCFG  = (LPC_SC->FLASHCFG & ~0x0000F000) | FLASHCFG_Val;
-#endif
-
-#ifdef SIMULATOR
-	/* Place this after SystemInit (originally i placed it inside SystemInit function so that it was "invisible" to students) */
-	/* Calculate Scaling. NOTE: do !NOT! go step by step (breakpoint and debug) here or the measurement will be wrong */
-	
-	ScaleFlag = 1;
-	
-	for (; i < N; i++) __ASM("NOP");
-	
-	ScaleFlag = 0;
+  LPC_SC->FLASHCFG  = (LPC_SC->FLASHCFG & ~0x0000F000U) | FLASHCFG_Val;
 #endif
 }
-
-
