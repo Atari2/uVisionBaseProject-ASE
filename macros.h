@@ -6,6 +6,7 @@
 #define MHz *1u
 #define SCALE(x) (x-1)
 #define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))
+#define BETWEEN(x, b, e) (x >= b && x <= e)
 #define LED_NUM     8                   /* Number of user LEDs   */
 #define FONT_WIDTH 8
 #define FONT_HEIGHT 16
