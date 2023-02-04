@@ -23,159 +23,6 @@ static uint32_t calc_count_from_ms(float millis) {
 	return (uint32_t)count;
 }
 
-/******************************************************************************
-** Function name:		enable_timer
-**
-** Descriptions:		Enable timer
-**
-** parameters:			timer number: 0 or 1
-** Returned value:		None
-**
-******************************************************************************/
-int enable_timer( TimerNo timer_num )
-{	
-	switch (timer_num) {
-		case Timer0:
-			LPC_TIM0->TCR = 1;
-			break;
-		case Timer1:
-			LPC_TIM1->TCR = 1;
-			break;
-		case Timer2:
-			LPC_TIM2->TCR = 1;
-			break;
-		case Timer3:
-			LPC_TIM3->TCR = 1;
-			break;
-		default:
-			return -1; 	// invalid timer number
-	}
-  return 0;
-}
-
-/******************************************************************************
-** Function name:		disable_timer
-**
-** Descriptions:		Disable timer
-**
-** parameters:			timer number: 0 or 1
-** Returned value:		None
-**
-******************************************************************************/
-int disable_timer( TimerNo timer_num )
-{
-	switch (timer_num) {
-		case Timer0:
-			LPC_TIM0->TCR = 0;
-			break;
-		case Timer1:
-			LPC_TIM1->TCR = 0;
-			break;
-		case Timer2:
-			LPC_TIM2->TCR = 0;
-			break;
-		case Timer3:
-			LPC_TIM3->TCR = 0;
-			break;
-		default:
-			return -1; 	// invalid timer number
-	}
-  return 0;
-}
-
-/******************************************************************************
-** Function name:		reset_timer
-**
-** Descriptions:		Reset timer
-**
-** parameters:			timer number: 0 or 1
-** Returned value:		None
-**
-******************************************************************************/
-int reset_timer( TimerNo timer_num )
-{
-  uint32_t regVal;
-	
-	switch (timer_num) {
-		case Timer0:
-			regVal = LPC_TIM0->TCR;
-			regVal |= 0x02;
-			LPC_TIM0->TCR = regVal;
-			break;
-		case Timer1:
-			regVal = LPC_TIM1->TCR;
-			regVal |= 0x02;
-			LPC_TIM1->TCR = regVal;
-			break;
-		case Timer2:
-			regVal = LPC_TIM1->TCR;
-			regVal |= 0x02;
-			LPC_TIM2->TCR = regVal;
-			break;
-		case Timer3:
-			regVal = LPC_TIM1->TCR;
-			regVal |= 0x02;
-			LPC_TIM3->TCR = regVal;
-			break;
-		default:
-			return -1; 	// invalid timer number
-	}
-  return 0;
-}
-	
-void power_timer(TimerNo timer_num) {
-	switch (timer_num) {
-		case Timer2:
-			LPC_SC->PCONP |= (1<<22);
-			break;
-		case Timer3:
-			LPC_SC->PCONP |= (1<<23);
-			break;
-		default:
-		case Timer0:
-		case Timer1:
-			break;
-	}
-}
-
-int init_timer_k(TimerNo timer_num, uint32_t TimerInterval, uint32_t prescale, uint32_t priority) {
-	uint32_t MCR0 = 3, MCR1 = 3, MCR2 = 3, MCR3 = 3;
-	static const enum IRQn TimerIRQ[] = {TIMER0_IRQn, TIMER1_IRQn, TIMER2_IRQn, TIMER3_IRQn};
-	if ((int)timer_num >= ARRAY_SIZE(TimerIRQ)) {
-		return -1; 		// invalid timer number
-	}
-	switch (timer_num) {
-		case Timer0:
-			LPC_TIM0->MR0 = TimerInterval;
-		  LPC_TIM0->MCR = MCR0;
-			LPC_TIM0->PR = prescale;
-			break;
-		case Timer1:
-			LPC_TIM1->MR0 = TimerInterval;
-		  LPC_TIM1->MCR = MCR1;
-		  LPC_TIM1->PR = prescale;
-			break;
-		case Timer2:
-			LPC_SC->PCONP |= (1<<22);
-			LPC_TIM2->MR0 = TimerInterval;
-		  LPC_TIM2->MCR = MCR2;
-		  LPC_TIM2->PR = prescale;
-			break;
-		case Timer3:
-			LPC_SC->PCONP |= (1<<23);
-			LPC_TIM3->MR0 = TimerInterval;
-			LPC_TIM3->MCR = MCR3;
-		  LPC_TIM3->PR = prescale;
-			break;
-		default:
-			break;
-	}
-	NVIC_EnableIRQ(TimerIRQ[timer_num]);
-	NVIC_SetPriority(TimerIRQ[timer_num], priority);
-  return 0;
-
-}
-
 int init_timer( TimerNo timer_num, float millis, uint32_t prescale,  uint32_t priority)
 {
 	uint32_t TimerInterval = 0;
@@ -388,7 +235,7 @@ int init_timer( TimerNo timer_num, float millis, uint32_t prescale,  uint32_t pr
 			//	 <i> 1 Stop on MR3: the TC and PC will be stopped and TCR[3] will be set to 0 if MR3 matches the TC
 			//	 <i> 0 Feature disabled.
 			//   </e>
-			MCR3 = 3;
+			MCR3 = 2;
 			// </h>
 			//*** <<< end of configuration section >>>    ***	
 	}
@@ -423,6 +270,159 @@ int init_timer( TimerNo timer_num, float millis, uint32_t prescale,  uint32_t pr
 	NVIC_EnableIRQ(TimerIRQ[timer_num]);
 	NVIC_SetPriority(TimerIRQ[timer_num], priority);
   return 0;
+}
+
+/******************************************************************************
+** Function name:		enable_timer
+**
+** Descriptions:		Enable timer
+**
+** parameters:			timer number: 0 or 1
+** Returned value:		None
+**
+******************************************************************************/
+int enable_timer( TimerNo timer_num )
+{	
+	switch (timer_num) {
+		case Timer0:
+			LPC_TIM0->TCR = 1;
+			break;
+		case Timer1:
+			LPC_TIM1->TCR = 1;
+			break;
+		case Timer2:
+			LPC_TIM2->TCR = 1;
+			break;
+		case Timer3:
+			LPC_TIM3->TCR = 1;
+			break;
+		default:
+			return -1; 	// invalid timer number
+	}
+  return 0;
+}
+
+/******************************************************************************
+** Function name:		disable_timer
+**
+** Descriptions:		Disable timer
+**
+** parameters:			timer number: 0 or 1
+** Returned value:		None
+**
+******************************************************************************/
+int disable_timer( TimerNo timer_num )
+{
+	switch (timer_num) {
+		case Timer0:
+			LPC_TIM0->TCR = 0;
+			break;
+		case Timer1:
+			LPC_TIM1->TCR = 0;
+			break;
+		case Timer2:
+			LPC_TIM2->TCR = 0;
+			break;
+		case Timer3:
+			LPC_TIM3->TCR = 0;
+			break;
+		default:
+			return -1; 	// invalid timer number
+	}
+  return 0;
+}
+
+/******************************************************************************
+** Function name:		reset_timer
+**
+** Descriptions:		Reset timer
+**
+** parameters:			timer number: 0 or 1
+** Returned value:		None
+**
+******************************************************************************/
+int reset_timer( TimerNo timer_num )
+{
+  uint32_t regVal;
+	
+	switch (timer_num) {
+		case Timer0:
+			regVal = LPC_TIM0->TCR;
+			regVal |= 0x02;
+			LPC_TIM0->TCR = regVal;
+			break;
+		case Timer1:
+			regVal = LPC_TIM1->TCR;
+			regVal |= 0x02;
+			LPC_TIM1->TCR = regVal;
+			break;
+		case Timer2:
+			regVal = LPC_TIM1->TCR;
+			regVal |= 0x02;
+			LPC_TIM2->TCR = regVal;
+			break;
+		case Timer3:
+			regVal = LPC_TIM1->TCR;
+			regVal |= 0x02;
+			LPC_TIM3->TCR = regVal;
+			break;
+		default:
+			return -1; 	// invalid timer number
+	}
+  return 0;
+}
+	
+void power_timer(TimerNo timer_num) {
+	switch (timer_num) {
+		case Timer2:
+			LPC_SC->PCONP |= (1<<22);
+			break;
+		case Timer3:
+			LPC_SC->PCONP |= (1<<23);
+			break;
+		default:
+		case Timer0:
+		case Timer1:
+			break;
+	}
+}
+
+int init_timer_k(TimerNo timer_num, uint32_t TimerInterval, uint32_t prescale, uint32_t priority) {
+	uint32_t MCR0 = 3, MCR1 = 3, MCR2 = 3, MCR3 = 3;
+	static const enum IRQn TimerIRQ[] = {TIMER0_IRQn, TIMER1_IRQn, TIMER2_IRQn, TIMER3_IRQn};
+	if ((int)timer_num >= ARRAY_SIZE(TimerIRQ)) {
+		return -1; 		// invalid timer number
+	}
+	switch (timer_num) {
+		case Timer0:
+			LPC_TIM0->MR0 = TimerInterval;
+		  LPC_TIM0->MCR = MCR0;
+			LPC_TIM0->PR = prescale;
+			break;
+		case Timer1:
+			LPC_TIM1->MR0 = TimerInterval;
+		  LPC_TIM1->MCR = MCR1;
+		  LPC_TIM1->PR = prescale;
+			break;
+		case Timer2:
+			LPC_SC->PCONP |= (1<<22);
+			LPC_TIM2->MR0 = TimerInterval;
+		  LPC_TIM2->MCR = MCR2;
+		  LPC_TIM2->PR = prescale;
+			break;
+		case Timer3:
+			LPC_SC->PCONP |= (1<<23);
+			LPC_TIM3->MR0 = TimerInterval;
+			LPC_TIM3->MCR = MCR3;
+		  LPC_TIM3->PR = prescale;
+			break;
+		default:
+			break;
+	}
+	NVIC_EnableIRQ(TimerIRQ[timer_num]);
+	NVIC_SetPriority(TimerIRQ[timer_num], priority);
+  return 0;
+
 }
 
 /******************************************************************************
