@@ -20,7 +20,6 @@ int main(void)
   SystemInit();  												/* System Initialization (i.e., PLL)  */
 	LED_init();
 	BUTTON_init();
-	LED_Out(ALL_LEDS);
 	joystick_init(JoyUp);
 	init_RIT(25 ms, 0);
 	enable_RIT();
