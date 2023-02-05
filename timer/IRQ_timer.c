@@ -9,7 +9,8 @@
 *********************************************************************************************************/
 #include "lpc17xx.h"
 #include "timer.h"
-
+#include "../macros.h"
+extern volatile Mode system_mode;
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -71,6 +72,9 @@ void TIMER2_IRQHandler (void)
 
 void TIMER3_IRQHandler (void)
 {
+	// Se il TIMER3 raggiunge il time-out, questo termina la modalita' Acquisizione e riporta il sistema nella modalita' Monitor. 
+	system_mode = Monitor;
+	disable_timer(Timer3);
   LPC_TIM3->IR = 1;			/* clear interrupt flag */
   return;
 }

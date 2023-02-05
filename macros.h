@@ -10,5 +10,11 @@
 #define LED_NUM     8                   /* Number of user LEDs   */
 #define FONT_WIDTH 8
 #define FONT_HEIGHT 16
+
+enum {
+	Monitor,
+	Acquisizione
+} typedef Mode;
+
 #endif
 
