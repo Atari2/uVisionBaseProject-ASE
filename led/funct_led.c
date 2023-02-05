@@ -11,13 +11,14 @@
 #include "lpc17xx.h"
 #include "led.h"
 #include "../macros.h"
-const unsigned long led_mask[] = { 1UL<<0, 1UL<<1, 1UL<<2, 1UL<< 3, 1UL<< 4, 1UL<< 5, 1UL<< 6, 1UL<< 7 };
-
+const BitLed led_mask[] = { BitLed0, BitLed1, BitLed2, BitLed3, BitLed4, BitLed5, BitLed6, BitLed7 };
+const BitLed ALL_LEDS = (BitLed)0xFF;
+const BitLed NO_LEDS = (BitLed)0x00;
 
 /*----------------------------------------------------------------------------
   Function that turns on requested LED
  *----------------------------------------------------------------------------*/
-void LED_On(unsigned int num) {
+void LED_On(LedNum num) {
  
   LPC_GPIO2->FIOPIN |= led_mask[num];
 }
@@ -25,7 +26,7 @@ void LED_On(unsigned int num) {
 /*----------------------------------------------------------------------------
   Function that turns off requested LED
  *----------------------------------------------------------------------------*/
-void LED_Off(unsigned int num) {
+void LED_Off(LedNum num) {
 
   LPC_GPIO2->FIOPIN &= ~led_mask[num];
 }
@@ -33,11 +34,11 @@ void LED_Off(unsigned int num) {
 /*----------------------------------------------------------------------------
   Function that outputs value to LEDs
  *----------------------------------------------------------------------------*/
-void LED_Out(unsigned int value) {
-  int i;
+void LED_Out(BitLed value) {
+  LedNum i = Led0;
 
-  for (i = 0; i < LED_NUM; i++) {
-    if (value & (1<<i)) {
+  for (; i <= Led7; i++) {
+    if (value & led_mask[i]) {
       LED_On (i);
     } else {
       LED_Off(i);
