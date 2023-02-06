@@ -10,5 +10,6 @@
 #define LED_NUM     8                   /* Number of user LEDs   */
 #define FONT_WIDTH 8
 #define FONT_HEIGHT 16
+#define N_V 10
 #endif
 

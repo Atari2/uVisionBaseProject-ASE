@@ -9,6 +9,10 @@
 *********************************************************************************************************/
 #include "lpc17xx.h"
 #include "timer.h"
+#include "../macros.h"
+#include "../LED/led.h"
+
+extern uint8_t VETT[N_V];
 
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
@@ -21,6 +25,16 @@
 ******************************************************************************/
 void TIMER0_IRQHandler (void)
 {
+	static uint32_t curr_index = 0;
+	if (curr_index == N_V) {
+		curr_index = 0;
+		disable_timer(Timer0);
+		reset_timer(Timer0);
+		LED_Out(NO_LEDS);
+		NVIC_EnableIRQ(EINT1_IRQn);
+	} else {
+		LED_Out((BitLed)VETT[curr_index++]);
+	}
   LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }

@@ -6,8 +6,30 @@
 ;; 				push {r4-r8,r10-r11,lr}	
 ;; 				pop {r4-r8,r10-r11,pc}
 ;; 				ENDP
-				
-				
+
+VETT   RN 0
+VALUE  RN 1
+N_V    RN 2
+get_and_sort    PROC
+				EXPORT get_and_sort
+				push {r4-r8,r10-r11,lr}	
+				mov r7, VALUE
+				mov r4, #0
+loop			
+				ldrb r5, [VETT, r4]
+				cmp r5, #0
+				strbeq VALUE, [VETT, r4]
+				beq exit
+				cmp VALUE, r5
+				strbhi VALUE, [VETT, r4]
+				movhi VALUE, r5
+				add r4, r4, #1
+				cmp r4, N_V
+				bne loop
+exit
+				mov r0, r7
+				pop {r4-r8,r10-r11,pc}
+				ENDP
 mSize  RN 3
 mSrc   RN 1
 mDst   RN 2
