@@ -29,6 +29,7 @@ extern int enable_timer( TimerNo timer_num );
 extern int disable_timer( TimerNo timer_num );
 extern int reset_timer( TimerNo timer_num );
 extern void set_timer_frequency(uint32_t frequency);
+extern uint32_t get_current_value(TimerNo timer_num);
 /* IRQ_timer.c */
 extern void TIMER0_IRQHandler (void);
 extern void TIMER1_IRQHandler (void);

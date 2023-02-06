@@ -425,6 +425,21 @@ int init_timer_k(TimerNo timer_num, uint32_t TimerInterval, uint32_t prescale, u
 
 }
 
+uint32_t get_current_value(TimerNo timer_num) {
+	switch (timer_num) {
+		case Timer0:
+			return LPC_TIM0->TC;
+		case Timer1:
+			return LPC_TIM1->TC;
+		case Timer2:
+			return LPC_TIM2->TC;
+		case Timer3:
+			return LPC_TIM3->TC;
+		default:
+			return 0;
+	}
+}
+
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/
