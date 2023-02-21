@@ -14,3 +14,4 @@ void EINT1_IRQHandler(void);
 void EINT2_IRQHandler(void);
 // usage: call this in RIT, debouncing will be handled automatically
 void button_handler_with_debouncing(btn_handler_t btnHandlers[3]);
+void button_set_debouncing_once(BtnIds id);
