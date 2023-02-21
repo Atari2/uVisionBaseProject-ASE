@@ -6,7 +6,46 @@
 ;; 				push {r4-r8,r10-r11,lr}	
 ;; 				pop {r4-r8,r10-r11,pc}
 ;; 				ENDP
+
+vett RN 0
+num RN 1
+super_ptr RN 2
+
+media_e_superiori_alla_media PROC
+				EXPORT media_e_superiori_alla_media
+				push {r4-r8,r10-r11,lr}	
 				
+				mov r4, #0
+				mov r5, #0
+sum_loop
+				ldrb r6, [vett, r5]
+				add r4, r4, r6
+				add r5, r5, #1
+				cmp r5, num
+				bne sum_loop
+				
+				; r4 sum of all entries in vett
+				; avg in r4
+				udiv r7, r4, num
+				
+				mov r4, #0
+				mov r5, #0
+super_loop
+				ldrb r6, [vett, r5] 
+				cmp r6, r7
+				addgt r4, r4, #1
+				add r5, r5, #1
+				cmp r5, num
+				bne super_loop
+				
+				; *super = r4
+				strb r4, [super_ptr]
+				
+				; return avg;
+				mov r0, r7
+				
+				pop {r4-r8,r10-r11,pc}
+				ENDP
 				
 mSize  RN 3
 mSrc   RN 1

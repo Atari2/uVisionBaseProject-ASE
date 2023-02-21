@@ -9,6 +9,8 @@
 *********************************************************************************************************/
 #include "lpc17xx.h"
 #include "timer.h"
+#include "../macros.h"
+#include "../led/led.h"
 
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
@@ -67,10 +69,18 @@ void TIMER2_IRQHandler (void)
 **
 ******************************************************************************/
 
-
-
+extern unsigned char VAR;
+extern unsigned char VETT[N_VETT];
+uint32_t cur_vett_index = 0;
 void TIMER3_IRQHandler (void)
 {
+	// Ad ogni interruzione scatenata del Timer 3, il valore di VAR viene depositato nella prima posizione libera di VETT e resettato (VAR riportato a 0)
+	if (cur_vett_index < ARRAY_SIZE(VETT)) {
+		// VETT si comporta come un normale vettore; se pieno (dopo N inserimenti), i valori catturati successivamente saranno scartati.
+		VETT[cur_vett_index] = VAR;
+		VAR = 0;
+		cur_vett_index++;
+	} 
   LPC_TIM3->IR = 1;			/* clear interrupt flag */
   return;
 }

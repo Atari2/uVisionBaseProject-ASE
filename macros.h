@@ -10,5 +10,12 @@
 #define LED_NUM     8                   /* Number of user LEDs   */
 #define FONT_WIDTH 8
 #define FONT_HEIGHT 16
+
+#if DEBUG
+#define N_VETT 4 // Per la fase di debug si consiglia di usare N pari a 4
+#else
+#define N_VETT 255 // Il valore massimo per N è 255
+#endif
+
 #endif
 
