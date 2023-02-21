@@ -40,6 +40,12 @@ volatile int btnPressed[3] = {0, 0, 0};
 const btn_handler_t empty_btn_handler = NULL;
 static const enum IRQn IRQ_Numbers[3] = {EINT0_IRQn, EINT1_IRQn, EINT2_IRQn};
 
+void button_set_debouncing_once(BtnIds id) {
+	btnPressed[id] = 1;
+	NVIC_EnableIRQ(IRQ_Numbers[id]);
+	LPC_PINCON->PINSEL4 &= ~(1 << (20 + id*2));		 /* External interrupt 0 pin selection */
+}
+
 void button_handler_with_debouncing(btn_handler_t btnHandlers[3])
 {			
 	volatile int i = 0;
