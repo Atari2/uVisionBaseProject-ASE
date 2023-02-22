@@ -3,6 +3,7 @@
 
 void EINT0_IRQHandler (void)	  
 {
+	button_set_debouncing_once(BTN0_ID);
   LPC_SC->EXTINT &= (1 << 0);     /* clear pending interrupt         */
 }
 
