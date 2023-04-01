@@ -8,10 +8,12 @@ void EINT0_IRQHandler (void)
 
 void EINT1_IRQHandler (void)	  
 {
+	button_set_debouncing_once(BTN1_ID);
 	LPC_SC->EXTINT &= (1 << 1);     /* clear pending interrupt         */
 }
 
 void EINT2_IRQHandler (void)	  
 {
+	button_set_debouncing_once(BTN2_ID);
   LPC_SC->EXTINT &= (1 << 2);     				 /* clear pending interrupt         */    
 }

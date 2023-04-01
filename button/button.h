@@ -9,6 +9,7 @@ typedef void(*btn_handler_t)();
 extern const btn_handler_t empty_btn_handler;
 void BUTTON_init(void);
 void BUTTON_disable(BtnIds id);
+void BUTTON_enable(BtnIds id);
 void EINT0_IRQHandler(void);
 void EINT1_IRQHandler(void);
 void EINT2_IRQHandler(void);

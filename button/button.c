@@ -36,6 +36,20 @@ void BUTTON_disable(BtnIds id) {
 	}
 }
 
+void BUTTON_enable(BtnIds id) {
+	switch (id) {
+		case BTN0_ID:
+			NVIC_EnableIRQ(EINT0_IRQn);
+			break;
+		case BTN1_ID:
+			NVIC_EnableIRQ(EINT1_IRQn);
+			break;
+		case BTN2_ID:
+			NVIC_EnableIRQ(EINT2_IRQn);
+			break;
+	}
+}
+
 volatile int btnPressed[3] = {0, 0, 0};
 const btn_handler_t empty_btn_handler = NULL;
 static const enum IRQn IRQ_Numbers[3] = {EINT0_IRQn, EINT1_IRQn, EINT2_IRQn};
