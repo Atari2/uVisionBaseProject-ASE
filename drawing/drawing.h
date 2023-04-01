@@ -1,5 +1,14 @@
 #ifndef _DRAWING_INCL
 #define _DRAWING_INCL
+
+/*
+    * drawing.h
+    *
+    *  Created in 2023
+    *      Author: Alessio R. (https://github.com/Atari2)
+    *      MIT License
+*/
+
 #include <stdint.h>
 
 #define LCD_HEIGHT 320

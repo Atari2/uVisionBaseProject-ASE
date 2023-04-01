@@ -1,7 +1,7 @@
 /*********************************************************************************************************
 **--------------File Info---------------------------------------------------------------------------------
 ** File name:           timer.h
-** Last modified Date:  2014-09-25
+** Last modified Date:  2023-02-20
 ** Last Version:        V1.00
 ** Descriptions:        Prototypes of functions included in the lib_led, funct_led .c files
 ** Correlated files:    lib_led.c, funct_led.c

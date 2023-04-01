@@ -1,7 +1,7 @@
 /*********************************************************************************************************
 **--------------File Info---------------------------------------------------------------------------------
 ** File name:           lib_timer.h
-** Last modified Date:  2014-09-25
+** Last modified Date:  2023-02-20
 ** Last Version:        V1.00
 ** Descriptions:        atomic functions to be used by higher sw levels
 ** Correlated files:    lib_timer.c, funct_timer.c, IRQ_timer.c

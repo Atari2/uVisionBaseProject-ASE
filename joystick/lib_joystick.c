@@ -1,7 +1,7 @@
 /*********************************************************************************************************
 **--------------File Info---------------------------------------------------------------------------------
 ** File name:           joystick.h
-** Last modified Date:  2018-12-30
+** Last modified Date:  2023-02-20
 ** Last Version:        V1.00
 ** Descriptions:        Atomic joystick init functions
 ** Correlated files:    lib_joystick.c, funct_joystick.c

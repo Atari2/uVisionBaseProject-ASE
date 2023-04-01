@@ -1,5 +1,13 @@
 #include <stdint.h>
 
+/*
+    * libsound.h
+    *
+    *  Created in 2023
+    *      Author: Alessio R. (https://github.com/Atari2)
+    *      MIT License
+*/
+
 enum {
 	N_None = -1,
   N_Do = 261,

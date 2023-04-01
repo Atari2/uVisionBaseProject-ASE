@@ -1,3 +1,11 @@
+/*
+    * libsound.c
+    *
+    *  Created in 2023
+    *      Author: Alessio R. (https://github.com/Atari2)
+    *      MIT License
+*/
+
 #include "libsound.h"
 #include "../timer/timer.h"
 #include "LPC17xx.h"

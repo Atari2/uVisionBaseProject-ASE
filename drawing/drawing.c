@@ -1,3 +1,11 @@
+/*
+    * drawing.c
+    *
+    *  Created in 2023
+    *      Author: Alessio R. (https://github.com/Atari2)
+    *      MIT License
+*/
+
 #include "LPC17xx.h"
 #include <string.h>
 #include "../GLCD/GLCD.h" 

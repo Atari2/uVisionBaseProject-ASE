@@ -1,7 +1,7 @@
 /*********************************************************************************************************
 **--------------File Info---------------------------------------------------------------------------------
 ** File name:           funct_led.h
-** Last modified Date:  2014-09-25
+** Last modified Date:  2023-02-20
 ** Last Version:        V1.00
 ** Descriptions:        High level led management functions
 ** Correlated files:    lib_led.c, funct_led.c
